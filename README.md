@@ -48,7 +48,6 @@
 8. **Quoting and Expansion**:
    - **Quotes** (`'` and `"`): Supports single and double quotes to handle strings containing spaces or special characters.
    - **Variable Expansion**: Variables (e.g., `$VAR`) are expanded within commands, allowing dynamic values to be inserted.
-   - **Wildcard Expansion**: Basic wildcard expansion is supported to match file and directory patterns in commands.
 
 9. **Signal Handling**: Minishell responds gracefully to signals:
    - `Ctrl+C`: Interrupts the current command.
