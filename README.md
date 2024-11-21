@@ -17,13 +17,49 @@
 
 ## Features
 
-- **Command Execution**: Execute binary commands found in `$PATH`.
-- **Built-in Commands**: Includes essential shell built-ins like `cd`, `echo`, `env`, `exit`, `export`, `pwd`, and `unset`.
-- **Environment Variable Management**: Support for environment variable expansion and manipulation.
-- **Pipelines and Redirections**: Implements basic pipe (`|`) and redirection (`>`, `<`) functionalities.
-- **Heredocs**: Support for heredoc (`<<`) input redirection.
-- **Signal Handling**: Proper handling of signals such as `Ctrl+C`, `Ctrl+D`, and `Ctrl+\`.
-- **Error Handling**: Graceful error messages and cleanup on invalid input or system errors.
+**Minishell** provides a streamlined shell environment with many core features found in Unix-like shells. Its capabilities include:
+
+1. **Command Execution**: Execute binary commands by leveraging the `$PATH` environment variable, allowing users to run a wide range of programs directly from Minishell. Commands are launched in child processes, isolating each command’s environment and state.
+
+2. **Built-in Commands**: Minishell includes core built-in commands, implemented internally to optimize performance and compatibility. These built-ins include:
+   - `cd` (Change Directory): Allows the user to change the current working directory.
+   - `echo` (Output Text): Prints text to the terminal, with options to suppress newlines.
+   - `env` (Environment Variables): Displays all current environment variables.
+   - `exit` (Exit Shell): Terminates the shell session with an optional exit code.
+   - `export` (Set Environment Variables): Sets or updates environment variables for use in the shell.
+   - `pwd` (Print Working Directory): Displays the path of the current directory.
+   - `unset` (Unset Environment Variable): Removes environment variables.
+
+3. **Environment Variable Management**: Supports creating, updating, and expanding environment variables, allowing flexibility in scripting and command execution. Variables can be referenced within commands using `$VAR` syntax, allowing dynamic configuration based on environment context.
+
+4. **Logical Operators (`&&` and `||`)**: 
+   - **AND (`&&`)**: Commands connected by `&&` are executed sequentially; the second command will only run if the first one succeeds.
+   - **OR (`||`)**: Commands connected by `||` provide alternative execution paths; the second command runs only if the first one fails. 
+   This logic enables users to create efficient and conditional command sequences directly in the shell.
+
+5. **Pipelines and Redirections**:
+   - **Pipes (`|`)**: Supports piping, allowing the output of one command to serve as the input for another, facilitating complex workflows.
+   - **Redirections (`>`, `<`, `>>`)**: Provides file redirection, enabling users to send command output to files, read input from files, or append to files without overwriting content.
+
+6. **Subshells and Parentheses for Command Prioritization**: Commands grouped in parentheses (`(...)`) run in subshells, allowing prioritized or isolated execution. This feature supports more complex command logic, letting users combine `&&`, `||`, and nested subshells to control execution flow precisely.
+
+7. **Heredocs**: Supports "heredoc" input redirection (`<<`), allowing multi-line input to be redirected to a command. Heredocs provide a straightforward way to embed complex or multi-line input without using external files.
+
+8. **Quoting and Expansion**:
+   - **Quotes** (`'` and `"`): Supports single and double quotes to handle strings containing spaces or special characters.
+   - **Variable Expansion**: Variables (e.g., `$VAR`) are expanded within commands, allowing dynamic values to be inserted.
+   - **Wildcard Expansion**: Basic wildcard expansion is supported to match file and directory patterns in commands.
+
+9. **Signal Handling**: Minishell responds gracefully to signals:
+   - `Ctrl+C`: Interrupts the current command.
+   - `Ctrl+D`: Sends an end-of-file (EOF) signal, allowing for shell exit in some contexts.
+   - `Ctrl+\`: Handles the quit signal without causing unexpected exits.
+
+10. **Error Handling**: Comprehensive error messages inform users of syntax errors, file issues, and other common problems, allowing for quick resolution. Graceful cleanup is performed to prevent memory leaks or lingering resources on errors.
+
+11. **Syntax Parsing and Grammar Validation**: A robust parser interprets command syntax and builds an abstract syntax tree (AST) to ensure valid execution order and correct handling of nested commands. This component validates complex command patterns and sequences, supporting logical and arithmetic grouping, subshells, and prioritized command execution.
+
+12. **Modular Design**: Minishell’s modular architecture divides functionality across components (parsing, execution, signal handling), making the codebase maintainable and extensible. This structure facilitates debugging, new feature implementation, and collaboration among developers.
 
 ---
 
